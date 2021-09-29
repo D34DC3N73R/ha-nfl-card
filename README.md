@@ -3,7 +3,7 @@ A Home Assistant frontend custom card for the ha-nfl integration.
 
 Currently in development. Considered pre-alpha.
 
-#Configuration
+## Configuration
 ```
 - type: 'custom:nfl-card'
   entity: sensor.nfl
