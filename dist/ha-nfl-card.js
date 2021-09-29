@@ -117,8 +117,8 @@ class NFLCard extends LitElement {
             .team-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.team_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
             .opponent-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.opponent_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
             .status { text-align:center; font-size:1.6em; font-weight: 700; }
-            .sub1 { font-weight: 700; font-size: 1.2em; }
-            .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
+            .sub1 { font-weight: 700; font-size: 1.2em; margin: 6px 0 2px; }
+            .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 2px 0; }
             .last-play { font-size: 1.2em; width: 100%; white-space: nowrap; overflow: hidden; box-sizing: border-box; }
             .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 10s linear infinite; }
             @keyframes slide { 0%   { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
@@ -212,8 +212,8 @@ class NFLCard extends LitElement {
             .team-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.team_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
             .opponent-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.opponent_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
             .status { text-align:center; font-size:1.6em; font-weight: 700; }
-            .sub1 { font-weight: 500; font-size: 1.2em; }
-            .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
+            .sub1 { font-weight: 500; font-size: 1.2em; margin: 6px 0 2px; }
+            .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 2px 0; }
             .last-play { font-size: 1.2em; width: 100%; white-space: nowrap; overflow: hidden; box-sizing: border-box; }
             .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 10s linear infinite; }
             @keyframes slide { 0%   { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
