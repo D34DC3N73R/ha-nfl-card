@@ -212,7 +212,7 @@ class NFLCard extends LitElement {
             .team-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.team_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
             .opponent-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.opponent_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
             .status { text-align:center; font-size:1.6em; font-weight: 700; }
-            .sub1 { font-weight: 700; font-size: 1.2em; }
+            .sub1 { font-weight: 500; font-size: 1.2em; }
             .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
             .last-play { font-size: 1.2em; width: 100%; white-space: nowrap; overflow: hidden; box-sizing: border-box; }
             .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 10s linear infinite; }
@@ -262,7 +262,7 @@ class NFLCard extends LitElement {
               <div class="line"></div>
               <div class="sub1">
                 <div class="date">${gameDate}</div>
-                <div class="odds">Line: ${stateObj.attributes.odds}</div>
+                <div class="odds">${stateObj.attributes.odds}</div>
               </div>
               <div class="sub2">
                 <div class="venue">${stateObj.attributes.venue}</div>
