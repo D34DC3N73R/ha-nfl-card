@@ -24,7 +24,7 @@ type: module
 
 ## Configuration
 ```
-- type: 'custom:nfl-card'
-  entity: sensor.nfl
+type: 'custom:nfl-card'
+entity: sensor.nfl
 ```
 Where `sensor.nfl` is the sensor name from the [ha-nfl](https://github.com/zacs/ha-nfl) integration.
