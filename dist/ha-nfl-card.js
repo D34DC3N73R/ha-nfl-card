@@ -262,7 +262,7 @@ class NFLCard extends LitElement {
               <div class="line"></div>
               <div class="sub1">
                 <div class="date">${gameDate}</div>
-                <div class="odds">Line:${stateObj.attributes.odds}</div>
+                <div class="odds">Line: ${stateObj.attributes.odds}</div>
               </div>
               <div class="sub2">
                 <div class="venue">${stateObj.attributes.venue}</div>
