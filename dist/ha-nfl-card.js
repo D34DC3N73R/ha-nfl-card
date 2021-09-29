@@ -127,8 +127,8 @@ class NFLCard extends LitElement {
             .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
             .probability-text { text-align: center; }
             .prob-flex { flex: 1; }
-            .opponent-probability { width: ${oppoProb}%; background-color: ${stateObj.attributes.opponent_colors[0]}; height: 14px; border-radius: 0 7px 7px 0; }
-            .team-probability { width: ${teamProb}%; background-color: ${stateObj.attributes.team_colors[0]}; height: 14px; border-radius: 7px 0 0 7px; float: right; position: relative; }
+            .opponent-probability { width: ${oppoProb}%; background-color: ${stateObj.attributes.opponent_colors[0]}; height: 14px; border-radius: 0 7px 7px 0; transition: all 1s ease-out; }
+            .team-probability { width: ${teamProb}%; background-color: ${stateObj.attributes.team_colors[0]}; height: 14px; border-radius: 7px 0 0 7px; float: right; position: relative; transition: all 1s ease-out; }
             .probability-wrapper { display: flex; }
             .percent { padding: 0 6px; }
             .post-game { margin: 0 auto; }
