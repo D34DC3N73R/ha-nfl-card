@@ -1,51 +1,64 @@
-const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace"));
-const html = LitElement.prototype.html;
-const css = LitElement.prototype.css;
-
-
+import { html, LitElement } from "https://unpkg.com/lit?module";
 
 class NFLCard extends LitElement {
+
   static get properties() {
     return {
       hass: {},
-      config: {}
+      _config: {},
     };
   }
 
+  setConfig(config) {
+    this._config = config;
+  }
+
   render() {
-    const ent = this.config.entity;
-    const stateObj = this.hass.states[ent];
+    if (!this.hass || !this._config) {
+      return html``;
+    }
+
+    const stateObj = this.hass.states[this._config.entity];
     const teamProb = (stateObj.attributes.team_win_probability * 100);
     const oppoProb = (stateObj.attributes.opponent_win_probability * 100);
     var dateForm = new Date (stateObj.attributes.date);
     var gameDate = dateForm.toLocaleDateString('en-US', { weekday: 'long', hour: 'numeric', minute: '2-digit' });
-    if (stateObj.state = 'POST') {
-    return html`
-            <style>
-            .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 500; }
-            .team-bg { opacity: 0.08; position:absolute; top: -30%; left: -20%; width: 58%; z-index: 0; }
-            .opponent-bg { opacity: 0.08; position:absolute; top: -30%; right: -20%; width: 58%; z-index: 0; }
-            .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
-            .team { width: 22%; text-align: center; }
-            .team img { max-width: 90px; }
-            .possession { width: 5%; font-size: 3em; text-align: center; }
-            .score { font-size: 2.5em; width: 12%; text-align: center; }
-            .divider { font-size: 2.5em; width: 5%; text-align: center; }
-            .name { font-size: 1.6em; }
-            .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
-            .timeouts { margin: 0 auto; width: 70%; }
-            .timeouts div.opponent-to:nth-child(-n + 0)  { opacity: 1; }
-            .timeouts div.team-to:nth-child(-n + 0)  { opacity: 1; }
-            .team-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.team_colors[0]}; display: inline-block; position: relative; opacity: 0.2; }
-            .opponent-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.opponent_colors[0]}; display: inline-block; position: relative; opacity: 0.2; }
-            .status { text-align:center; font-size:1.6em; font-weight: 700; }
-            .sub1 { font-weight: 700; font-size: 1.2em; }
-            .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
-            .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
-            </style>
+    if (stateObj.attributes.possession == stateObj.attributes.team_id) {
+      var teamPoss = 1;
+    }
+    if (stateObj.attributes.possession == stateObj.attributes.opponent_id) {
+      var oppoPoss = 1;
+    }
 
-            <ha-card>            
-            <div class="card">
+    if (!stateObj) {
+      return html` <ha-card>Unknown entity: ${this._config.entity}</ha-card> `;
+    }
+
+    if (stateObj.state == 'POST') {
+      return html`
+        <style>
+          .card { position: relative; overflow: hidden; padding: 16px 16px 20px; font-weight: 500; }
+          .team-bg { opacity: 0.08; position: absolute; top: -30%; left: -20%; width: 58%; z-index: 0; }
+          .opponent-bg { opacity: 0.08; position: absolute; top: -30%; right: -20%; width: 58%; z-index: 0; }
+          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+          .team { text-align: center; }
+          .team img { max-width: 90px; }
+          .possession, .teamposs, .oppoposs { font-size: 3em; text-align: center; opacity: 0; }
+          .teamposs {opacity: ${teamPoss} !important; }
+          .oppoposs {opacity: ${oppoPoss} !important; }
+          .score { font-size: 2.5em; text-align: center; }
+          .divider { font-size: 2.5em; text-align: center; }
+          .name { font-size: 1.6em; margin-bottom: 4px; }
+          .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
+          .timeouts { margin: 0 auto; width: 70%; }
+          .timeouts div.opponent-to:nth-child(-n + 0)  { opacity: 1; }
+          .timeouts div.team-to:nth-child(-n + 0)  { opacity: 1; }
+          .team-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.team_colors[0]}; display: inline-block; position: relative; opacity: 0.2; }
+          .opponent-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.opponent_colors[0]}; display: inline-block; position: relative; opacity: 0.2; }
+          .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
+        </style>
+        <ha-card>
+          <div class="card">
             <img class="team-bg" src="${stateObj.attributes.team_logo}" />
             <img class="opponent-bg" src="${stateObj.attributes.opponent_logo}" />
             <div class="card-content">
@@ -59,11 +72,11 @@ class NFLCard extends LitElement {
                   <div class="team-to"></div>
                 </div>
               </div>
-              <div class="possession"></div>
+              <div class="teamposs">&bull;</div>
               <div class="score">${stateObj.attributes.team_score}</div>
               <div class="divider">-</div>
               <div class="score">${stateObj.attributes.opponent_score}</div>
-              <div class="possession"></div>
+              <div class="oppoposs">&bull;</div>
               <div class="team">
                 <img src="${stateObj.attributes.opponent_logo}" />
                 <div class="name">${stateObj.attributes.opponent_name}</div>
@@ -76,23 +89,27 @@ class NFLCard extends LitElement {
               </div>
             </div>
             <div class="play-clock">FINAL</div>
-          </div>   
-          </ha-card>    
+          </div>
+        </ha-card>
       `;
-      };
-      if (stateObj.state = 'IN') {
-      return html`
-      <style>
+    }
+
+
+    if (stateObj.state == 'IN') {
+        return html`
+          <style>
             .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 500; }
             .team-bg { opacity: 0.08; position:absolute; top: -20%; left: -20%; width: 58%; z-index: 0; }
             .opponent-bg { opacity: 0.08; position:absolute; top: -20%; right: -20%; width: 58%; z-index: 0; }
             .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
-            .team { width: 22%; text-align: center; }
+            .team { text-align: center;  }
             .team img { max-width: 90px; }
-            .possession { width: 5%; font-size: 3em; text-align: center; }
-            .score { font-size: 2.5em; width: 12%; text-align: center; }
-            .divider { font-size: 2.5em; width: 5%; text-align: center; }
-            .name { font-size: 1.6em; }
+            .possession, .teamposs, .oppoposs { font-size: 3em; text-align: center; opacity: 0; }
+            .teamposs {opacity: ${teamPoss} !important; }
+            .oppoposs {opacity: ${oppoPoss} !important; }
+            .score { font-size: 2.5em; text-align: center; }
+            .divider { font-size: 2.5em; text-align: center; }
+            .name { font-size: 1.6em; margin-bottom: 4px; }
             .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
             .timeouts { margin: 0 auto; width: 70%; }
             .timeouts div.opponent-to:nth-child(-n + ${stateObj.attributes.opponent_timeouts})  { opacity: 1; }
@@ -115,9 +132,8 @@ class NFLCard extends LitElement {
             .probability-wrapper { display: flex; }
             .percent { padding: 0 6px; }
             .post-game { margin: 0 auto; }
-            </style>
-
-            <ha-card>            
+          </style>
+          <ha-card>
             <div class="card">
             <img class="team-bg" src="${stateObj.attributes.team_logo}" />
             <img class="opponent-bg" src="${stateObj.attributes.opponent_logo}" />
@@ -132,37 +148,11 @@ class NFLCard extends LitElement {
                   <div class="team-to"></div>
                 </div>
               </div>
-      `;
-      };
-      if (stateObj.attributes.possession = stateObj.attributes.team_id) {
-      return html`
-              <div class="possession">&bull;</div>
-              `;
-            };
-      if (stateObj.attributes.possession = stateObj.attributes.opponent_id) {
-      return html`
-              <div class="possession"></div>
-              `;
-            };
-      if (stateObj.state = 'IN') {
-        return html`
+              <div class="teamposs">&bull;</div>
               <div class="score">${stateObj.attributes.team_score}</div>
               <div class="divider">-</div>
               <div class="score">${stateObj.attributes.opponent_score}</div>
-              `;
-            };
-      if (stateObj.attributes.possession = stateObj.attributes.opponent_id) {
-      return html`
-              <div class="possession">>&bull;</div>
-              `;
-            };
-      if (stateObj.attributes.possession = stateObj.attributes.team_id) {
-        return html`
-                <div class="possession"></div>
-                `;
-              };
-      if (stateObj.state = 'IN') {
-        return html`
+              <div class="oppoposs">&bull;</div>
               <div class="team">
                 <img src="${stateObj.attributes.opponent_logo}" />
                 <div class="name">${stateObj.attributes.opponent_name}</div>
@@ -195,48 +185,50 @@ class NFLCard extends LitElement {
               <div class="prob-flex"><div class="opponent-probability"></div></div>
               <div class="oppo-percent">${oppoProb}%</div>
             </div>
-          </div>   
-          </ha-card>    
-      `;
-      };
-      if (stateObj.state = 'PRE') {
+          </div>
+          </ha-card>
+        `;
+    }
+
+    if (stateObj.state == 'PRE') {
         return html`
-        <style>
-              .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 500; }
-              .team-bg { opacity: 0.08; position:absolute; top: -20%; left: -20%; width: 58%; z-index: 0; }
-              .opponent-bg { opacity: 0.08; position:absolute; top: -20%; right: -20%; width: 58%; z-index: 0; }
-              .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
-              .team { width: 22%; text-align: center; }
-              .team img { max-width: 90px; }
-              .possession { width: 5%; font-size: 3em; text-align: center; }
-              .score { font-size: 2.5em; width: 12%; text-align: center; }
-              .divider { font-size: 2.5em; width: 5%; text-align: center; }
-              .name { font-size: 1.6em; }
-              .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
-              .timeouts { margin: 0 auto; width: 70%; }
-              .timeouts div.opponent-to:nth-child(-n + ${stateObj.attributes.opponent_timeouts})  { opacity: 1; }
-              .timeouts div.team-to:nth-child(-n + ${stateObj.attributes.team_timeouts})  { opacity: 1; }
-              .team-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.team_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
-              .opponent-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.opponent_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
-              .status { text-align:center; font-size:1.6em; font-weight: 700; }
-              .sub1 { font-weight: 700; font-size: 1.2em; }
-              .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
-              .last-play { font-size: 1.2em; width: 100%; white-space: nowrap; overflow: hidden; box-sizing: border-box; }
-              .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 10s linear infinite; }
-              @keyframes slide { 0%   { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-              .clock { text-align: center; font-size: 1.4em; }
-              .down-distance { text-align: right; font-weight: 700; }
-              .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
-              .probability-text { text-align: center; }
-              .prob-flex { flex: 1; }
-              .opponent-probability { width: ${oppoProb}%; background-color: ${stateObj.attributes.opponent_colors[0]}; height: 14px; border-radius: 0 7px 7px 0; }
-              .team-probability { width: ${teamProb}%; background-color: ${stateObj.attributes.team_colors[0]}; height: 14px; border-radius: 7px 0 0 7px; float: right; position: relative; }
-              .probability-wrapper { display: flex; }
-              .percent { padding: 0 6px; }
-              .post-game { margin: 0 auto; }
-              </style>
-  
-              <ha-card>            
+          <style>
+            .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 500; }
+            .team-bg { opacity: 0.08; position:absolute; top: -20%; left: -20%; width: 58%; z-index: 0; }
+            .opponent-bg { opacity: 0.08; position:absolute; top: -20%; right: -20%; width: 58%; z-index: 0; }
+            .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+            .team { text-align: center; }
+            .team img { max-width: 90px; }
+            .possession, .teamposs, .oppoposs { font-size: 3em; text-align: center; opacity: 0; }
+            .teamposs {opacity: ${teamPoss} !important; }
+            .oppoposs {opacity: ${oppoPoss} !important; }
+            .score { font-size: 2.5em; text-align: center; }
+            .divider { font-size: 2.5em; text-align: center; }
+            .name { font-size: 1.6em; margin-bottom: 4px; }
+            .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
+            .timeouts { margin: 0 auto; width: 70%; }
+            .timeouts div.opponent-to:nth-child(-n + ${stateObj.attributes.opponent_timeouts})  { opacity: 1; }
+            .timeouts div.team-to:nth-child(-n + ${stateObj.attributes.team_timeouts})  { opacity: 1; }
+            .team-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.team_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
+            .opponent-to { height: 6px; border-radius: 3px; width: 20%; background-color: ${stateObj.attributes.opponent_colors[0]}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
+            .status { text-align:center; font-size:1.6em; font-weight: 700; }
+            .sub1 { font-weight: 700; font-size: 1.2em; }
+            .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
+            .last-play { font-size: 1.2em; width: 100%; white-space: nowrap; overflow: hidden; box-sizing: border-box; }
+            .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 10s linear infinite; }
+            @keyframes slide { 0%   { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+            .clock { text-align: center; font-size: 1.4em; }
+            .down-distance { text-align: right; font-weight: 700; }
+            .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
+            .probability-text { text-align: center; }
+            .prob-flex { flex: 1; }
+            .opponent-probability { width: ${oppoProb}%; background-color: ${stateObj.attributes.opponent_colors[0]}; height: 14px; border-radius: 0 7px 7px 0; }
+            .team-probability { width: ${teamProb}%; background-color: ${stateObj.attributes.team_colors[0]}; height: 14px; border-radius: 7px 0 0 7px; float: right; position: relative; }
+            .probability-wrapper { display: flex; }
+            .percent { padding: 0 6px; }
+            .post-game { margin: 0 auto; }
+          </style>
+          <ha-card>
               <div class="card">
               <img class="team-bg" src="${stateObj.attributes.team_logo}" />
               <img class="opponent-bg" src="${stateObj.attributes.opponent_logo}" />
@@ -251,11 +243,11 @@ class NFLCard extends LitElement {
                     <div class="team-to"></div>
                   </div>
                 </div>
-                <div class="possession"></div>
+                <div class="teamposs">&bull;</div>
                 <div class="score">${stateObj.attributes.team_score}</div>
                 <div class="divider">-</div>
                 <div class="score">${stateObj.attributes.opponent_score}</div>
-                <div class="possession"></div>
+                <div class="oppoposs">&bull;</div>
                 <div class="team">
                   <img src="${stateObj.attributes.opponent_logo}" />
                   <div class="name">${stateObj.attributes.opponent_name}</div>
@@ -280,26 +272,11 @@ class NFLCard extends LitElement {
                 <div class="location">${stateObj.attributes.location}</div>
                 <div class="network">${stateObj.attributes.tv_network}</div>
               </div>
-            </div>  
-            </ha-card>    
+            </div>
+            </ha-card>
         `;
-        };
-  }
-
-
-  setConfig(config) {
-    if (!config.entity) {
-      throw new Error("You need to define the entity");
     }
-    this.config = config;
   }
-
-  // The height of your card. Home Assistant uses this to automatically
-  // distribute all cards over the available columns.
-  getCardSize() {
-    return 3;
-  }
-
-
 }
+
 customElements.define("nfl-card", NFLCard);
