@@ -37,16 +37,16 @@ class NFLCard extends LitElement {
     if (stateObj.state == 'POST') {
       return html`
         <style>
-          .card { position: relative; overflow: hidden; padding: 16px 16px 20px; font-weight: 500; }
+          .card { position: relative; overflow: hidden; padding: 16px 16px 20px; font-weight: 400; }
           .team-bg { opacity: 0.08; position: absolute; top: -30%; left: -20%; width: 58%; z-index: 0; }
           .opponent-bg { opacity: 0.08; position: absolute; top: -30%; right: -20%; width: 58%; z-index: 0; }
           .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
           .team { text-align: center; }
           .team img { max-width: 90px; }
-          .possession, .teamposs, .oppoposs { font-size: 3em; text-align: center; opacity: 0; }
+          .possession, .teamposs, .oppoposs { font-size: 2em; text-align: center; opacity: 0; font-weight:900; }
           .teamposs {opacity: ${teamPoss} !important; }
           .oppoposs {opacity: ${oppoPoss} !important; }
-          .score { font-size: 2.5em; text-align: center; }
+          .score { font-size: 3em; text-align: center; }
           .divider { font-size: 2.5em; text-align: center; }
           .name { font-size: 1.6em; margin-bottom: 4px; }
           .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
@@ -98,16 +98,16 @@ class NFLCard extends LitElement {
     if (stateObj.state == 'IN') {
         return html`
           <style>
-            .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 500; }
+            .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 400; }
             .team-bg { opacity: 0.08; position:absolute; top: -20%; left: -20%; width: 58%; z-index: 0; }
             .opponent-bg { opacity: 0.08; position:absolute; top: -20%; right: -20%; width: 58%; z-index: 0; }
             .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
             .team { text-align: center;  }
             .team img { max-width: 90px; }
-            .possession, .teamposs, .oppoposs { font-size: 3em; text-align: center; opacity: 0; }
+            .possession, .teamposs, .oppoposs { font-size: 2em; text-align: center; opacity: 0; font-weight:900; }
             .teamposs {opacity: ${teamPoss} !important; }
             .oppoposs {opacity: ${oppoPoss} !important; }
-            .score { font-size: 2.5em; text-align: center; }
+            .score { font-size: 3em; text-align: center; }
             .divider { font-size: 2.5em; text-align: center; }
             .name { font-size: 1.6em; margin-bottom: 4px; }
             .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
@@ -193,16 +193,16 @@ class NFLCard extends LitElement {
     if (stateObj.state == 'PRE') {
         return html`
           <style>
-            .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 500; }
+            .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 400; }
             .team-bg { opacity: 0.08; position:absolute; top: -20%; left: -20%; width: 58%; z-index: 0; }
             .opponent-bg { opacity: 0.08; position:absolute; top: -20%; right: -20%; width: 58%; z-index: 0; }
             .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
             .team { text-align: center; }
             .team img { max-width: 90px; }
-            .possession, .teamposs, .oppoposs { font-size: 3em; text-align: center; opacity: 0; }
+            .possession, .teamposs, .oppoposs { font-size: 2em; text-align: center; opacity: 0; font-weight:900; }
             .teamposs {opacity: ${teamPoss} !important; }
             .oppoposs {opacity: ${oppoPoss} !important; }
-            .score { font-size: 2.5em; text-align: center; }
+            .score { font-size: 3em; text-align: center; }
             .divider { font-size: 2.5em; text-align: center; }
             .name { font-size: 1.6em; margin-bottom: 4px; }
             .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
@@ -219,7 +219,7 @@ class NFLCard extends LitElement {
             @keyframes slide { 0%   { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
             .clock { text-align: center; font-size: 1.4em; }
             .down-distance { text-align: right; font-weight: 700; }
-            .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
+            .play-clock { text-align: center; margin-top: -24px; }
             .probability-text { text-align: center; }
             .prob-flex { flex: 1; }
             .opponent-probability { width: ${oppoProb}%; background-color: ${stateObj.attributes.opponent_colors[0]}; height: 14px; border-radius: 0 7px 7px 0; }
@@ -259,6 +259,7 @@ class NFLCard extends LitElement {
                   </div>
                 </div>
               </div>
+              <div class="play-clock">Kickoff ${stateObj.attributes.kickoff_in}</div>
               <div class="line"></div>
               <div class="sub1">
                 <div class="date">${gameDate}</div>
