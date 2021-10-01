@@ -19,8 +19,8 @@ class NFLCard extends LitElement {
     }
 
     const stateObj = this.hass.states[this._config.entity];
-    const teamProb = (stateObj.attributes.team_win_probability * 100);
-    const oppoProb = (stateObj.attributes.opponent_win_probability * 100);
+    const teamProb = (stateObj.attributes.team_win_probability * 100).toFixed(2);
+    const oppoProb = (stateObj.attributes.opponent_win_probability * 100).toFixed(2);
     var dateForm = new Date (stateObj.attributes.date);
     var gameDate = dateForm.toLocaleDateString('en-US', { weekday: 'long', hour: 'numeric', minute: '2-digit' });
     if (stateObj.attributes.possession == stateObj.attributes.team_id) {
@@ -120,7 +120,7 @@ class NFLCard extends LitElement {
             .sub1 { font-weight: 700; font-size: 1.2em; margin: 6px 0 2px; }
             .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 2px 0; }
             .last-play { font-size: 1.2em; width: 100%; white-space: nowrap; overflow: hidden; box-sizing: border-box; }
-            .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 10s linear infinite; }
+            .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 18s linear infinite; }
             @keyframes slide { 0%   { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
             .clock { text-align: center; font-size: 1.4em; }
             .down-distance { text-align: right; font-weight: 700; }
