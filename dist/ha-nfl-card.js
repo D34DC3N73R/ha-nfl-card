@@ -19,8 +19,8 @@ class NFLCard extends LitElement {
     }
 
     const stateObj = this.hass.states[this._config.entity];
-    const teamProb = (stateObj.attributes.team_win_probability * 100).toFixed(2);
-    const oppoProb = (stateObj.attributes.opponent_win_probability * 100).toFixed(2);
+    const teamProb = (stateObj.attributes.team_win_probability * 100).toFixed(0);
+    const oppoProb = (stateObj.attributes.opponent_win_probability * 100).toFixed(0);
     var dateForm = new Date (stateObj.attributes.date);
     var gameDate = dateForm.toLocaleDateString('en-US', { weekday: 'long', hour: 'numeric', minute: '2-digit' });
     if (stateObj.attributes.possession == stateObj.attributes.team_id) {
