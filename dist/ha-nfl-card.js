@@ -43,7 +43,7 @@ class NFLCard extends LitElement {
           .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
           .team { text-align: center; }
           .team img { max-width: 90px; }
-          .possession, .teamposs, .oppoposs { font-size: 2em; text-align: center; opacity: 0; font-weight:900; }
+          .possession, .teamposs, .oppoposs { font-size: 2.5em; text-align: center; opacity: 0; font-weight:900; }
           .teamposs {opacity: ${teamPoss} !important; }
           .oppoposs {opacity: ${oppoPoss} !important; }
           .score { font-size: 3em; text-align: center; }
@@ -104,7 +104,7 @@ class NFLCard extends LitElement {
             .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
             .team { text-align: center;  }
             .team img { max-width: 90px; }
-            .possession, .teamposs, .oppoposs { font-size: 2em; text-align: center; opacity: 0; font-weight:900; }
+            .possession, .teamposs, .oppoposs { font-size: 2.5em; text-align: center; opacity: 0; font-weight:900; }
             .teamposs {opacity: ${teamPoss} !important; }
             .oppoposs {opacity: ${oppoPoss} !important; }
             .score { font-size: 3em; text-align: center; }
@@ -123,7 +123,7 @@ class NFLCard extends LitElement {
             .last-play p { display: inline-block; padding-left: 100%; margin: 2px 0 12px; animation : slide 18s linear infinite; }
             @keyframes slide { 0%   { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
             .clock { text-align: center; font-size: 1.4em; }
-            .down-distance { text-align: right; font-weight: 700; }
+            .down-distance { text-align: right; }
             .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
             .probability-text { text-align: center; }
             .prob-flex { flex: 1; }
@@ -199,7 +199,7 @@ class NFLCard extends LitElement {
             .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
             .team { text-align: center; }
             .team img { max-width: 90px; }
-            .possession, .teamposs, .oppoposs { font-size: 2em; text-align: center; opacity: 0; font-weight:900; }
+            .possession, .teamposs, .oppoposs { font-size: 2.5em; text-align: center; opacity: 0; font-weight:900; }
             .teamposs {opacity: ${teamPoss} !important; }
             .oppoposs {opacity: ${oppoPoss} !important; }
             .score { font-size: 3em; text-align: center; }
