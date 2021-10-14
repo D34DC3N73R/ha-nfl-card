@@ -13,6 +13,10 @@ class NFLCard extends LitElement {
     this._config = config;
   }
 
+  getCardSize() {
+    return 5;
+  }
+
   render() {
     if (!this.hass || !this._config) {
       return html``;
@@ -276,6 +280,34 @@ class NFLCard extends LitElement {
             </div>
             </ha-card>
         `;
+    }
+
+    if (stateObj.state == 'BYE') {
+      return html`
+        <style>
+          .card { position: relative; overflow: hidden; padding: 16px 16px 20px; font-weight: 400; }
+          .team-bg { opacity: 0.08; position: absolute; top: -20%; left: -30%; width: 75%; z-index: 0; }
+          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+          .team { text-align: center; }
+          .team img { max-width: 90px; }
+          .name { font-size: 1.6em; margin-bottom: 4px; }
+          .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
+          .bye { font-size: 1.2em; text-align: center; }
+        </style>
+        <ha-card>
+          <div class="card">
+            <img class="team-bg" src="${stateObj.attributes.team_logo}" />
+            <div class="card-content">
+              <div class="team">
+                <img src="${stateObj.attributes.team_logo}" />
+                <div class="name">${stateObj.attributes.team_name}</div>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="bye">Bye Week</div>
+          </div>
+        </ha-card>
+      `;
     }
   }
 }
