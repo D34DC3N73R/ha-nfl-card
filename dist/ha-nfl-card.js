@@ -22,24 +22,28 @@ class NFLCard extends LitElement {
     }
 
     const stateObj = this.hass.states[this._config.entity];
-    const colorOut = this._config.outline;
+    const outline = this._config.outline;
     const teamProb = (stateObj.attributes.team_win_probability * 100).toFixed(0);
     const oppoProb = (stateObj.attributes.opponent_win_probability * 100).toFixed(0);
 
+    var outlineColor = this._config.outline_color;
     var dateForm = new Date (stateObj.attributes.date);
     var gameDay = dateForm.toLocaleDateString('en-US', { weekday: 'long' });
     var gameTime = dateForm.toLocaleTimeString('en-US', { hour: '2-digit', minute:'2-digit' });
     
-    if (colorOut == true) {
+    if (outline == true) {
       var clrOut = 1;
       var toRadius = 4;
       var probRadius = 7;
     }
-    if (!this._config.outline || colorOut == false){
+    if (!this._config.outline || outline == false){
       var clrOut = 0;
       var toRadius = 3;
       var probRadius = 6;
     }
+    if (!this._config.outline_color) {
+      var outlineColor = white;
+    }  
     if (stateObj.attributes.possession == stateObj.attributes.team_id) {
       var teamPoss = 1;
     }
@@ -67,7 +71,7 @@ class NFLCard extends LitElement {
       return html` <ha-card>Unknown entity: ${this._config.entity}</ha-card> `;
     }
     if (stateObj.state == 'unavailable') {
-      throw new Error('Defined sensor unavailable.');
+      throw new Error('NFL Sensor unavailable.');
     }
 
     if (stateObj.state == 'POST') {
@@ -132,8 +136,8 @@ class NFLCard extends LitElement {
             .timeouts { margin: 0 auto; width: 70%; }
             .timeouts div.opponent-to:nth-child(-n + ${stateObj.attributes.opponent_timeouts})  { opacity: 1; }
             .timeouts div.team-to:nth-child(-n + ${stateObj.attributes.team_timeouts})  { opacity: 1; }
-            .team-to { height: 6px; border-radius: ${toRadius}px; border: ${clrOut}px solid white; width: 20%; background-color: ${teamColor}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
-            .opponent-to { height: 6px; border-radius: ${toRadius}px; border: ${clrOut}px solid white; width: 20%; background-color: ${oppoColor}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
+            .team-to { height: 6px; border-radius: ${toRadius}px; border: ${clrOut}px solid ${outlineColor}; width: 20%; background-color: ${teamColor}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
+            .opponent-to { height: 6px; border-radius: ${toRadius}px; border: ${clrOut}px solid ${outlineColor}; width: 20%; background-color: ${oppoColor}; display: inline-block; margin: 0 auto; position: relative; opacity: 0.2; }
             .status { text-align:center; font-size:1.6em; font-weight: 700; }
             .sub1 { font-weight: 700; font-size: 1.2em; margin: 6px 0 2px; }
             .sub1, .sub2, .sub3 { display: flex; justify-content: space-between; align-items: center; margin: 2px 0; }
@@ -144,9 +148,9 @@ class NFLCard extends LitElement {
             .down-distance { text-align: right; }
             .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
             .probability-text { text-align: center; }
-            .prob-flex { flex: 1; margin-top: 4px; }
-            .opponent-probability { width: ${oppoProb}%; background-color: ${oppoColor}; height: 12px; border-radius: 0 ${probRadius}px ${probRadius}px 0; border: ${clrOut}px solid white; border-left: 0; transition: all 1s ease-out; }
-            .team-probability { width: ${teamProb}%; background-color: ${teamColor}; height: 12px; border-radius: ${probRadius}px 0 0 ${probRadius}px; border: ${clrOut}px solid white; border-right: 0; float: right; position: relative; transition: all 1s ease-out; }
+            .prob-flex { width: 100%; display: flex; justify-content: center; margin-top: 4px; }
+            .opponent-probability { width: ${oppoProb}%; background-color: ${oppoColor}; height: 12px; border-radius: 0 ${probRadius}px ${probRadius}px 0; border: ${clrOut}px solid ${outlineColor}; border-left: 0; transition: all 1s ease-out; }
+            .team-probability { width: ${teamProb}%; background-color: ${teamColor}; height: 12px; border-radius: ${probRadius}px 0 0 ${probRadius}px; border: ${clrOut}px solid ${outlineColor}; border-right: 0; transition: all 1s ease-out; }
             .probability-wrapper { display: flex; }
             .percent { padding: 0 6px; }
             .post-game { margin: 0 auto; }
@@ -199,8 +203,10 @@ class NFLCard extends LitElement {
             <div class="probability-text">Win Probability</div>
             <div class="probability-wrapper">
               <div class="percent">${teamProb}%</div>
-              <div class="prob-flex"><div class="team-probability"></div></div>
-              <div class="prob-flex"><div class="opponent-probability"></div></div>
+              <div class="prob-flex">
+                <div class="team-probability"></div>
+                <div class="opponent-probability"></div>
+              </div>
               <div class="oppo-percent">${oppoProb}%</div>
             </div>
           </div>
