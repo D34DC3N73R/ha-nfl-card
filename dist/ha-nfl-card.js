@@ -71,7 +71,11 @@ class NFLCard extends LitElement {
       return html` <ha-card>Unknown entity: ${this._config.entity}</ha-card> `;
     }
     if (stateObj.state == 'unavailable') {
-      throw new Error('NFL Sensor unavailable.');
+      return html`
+        <ha-card>
+          Sensor unavailable: ${this._config.entity}
+        </ha-card> 
+      `;
     }
 
     if (stateObj.state == 'POST') {
