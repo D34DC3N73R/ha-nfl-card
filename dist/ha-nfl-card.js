@@ -160,6 +160,8 @@ class NFLCard extends LitElement {
             .opponent-probability { width: ${oppoProb}%; background-color: ${oppoColor}; height: 12px; border-radius: 0 ${probRadius}px ${probRadius}px 0; border: ${clrOut}px solid ${outColor}; border-left: 0; transition: all 1s ease-out; }
             .team-probability { width: ${teamProb}%; background-color: ${teamColor}; height: 12px; border-radius: ${probRadius}px 0 0 ${probRadius}px; border: ${clrOut}px solid ${outColor}; border-right: 0; transition: all 1s ease-out; }
             .probability-wrapper { display: flex; }
+            .team-percent { flex: 0 0 10px; padding: 0 0 0 10px; }
+            .oppo-percent { flex: 0 0 10px; padding: 0 0 0 10px; text-align: right; }
             .percent { padding: 0 6px; }
             .post-game { margin: 0 auto; }
           </style>
@@ -210,7 +212,7 @@ class NFLCard extends LitElement {
             </div>
             <div class="probability-text">Win Probability</div>
             <div class="probability-wrapper">
-              <div class="percent">${teamProb}%</div>
+              <div class="team-percent">${teamProb}%</div>
               <div class="prob-flex">
                 <div class="team-probability"></div>
                 <div class="opponent-probability"></div>
