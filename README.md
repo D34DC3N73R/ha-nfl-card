@@ -1,19 +1,19 @@
 # Home Assistant NFL Card
 A Home Assistant frontend custom card for the [ha-nfl](https://github.com/zacs/ha-nfl) integration.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PREGAME
+#### &nbsp;&nbsp;&nbsp;PREGAME
 
 ![pregame](https://user-images.githubusercontent.com/9123670/138403165-fe83a2f1-7ecd-4b47-8915-17c84d69a8e5.png)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN GAME
+#### &nbsp;&nbsp;&nbsp;IN GAME
 
 ![ingame](https://user-images.githubusercontent.com/9123670/138403208-92f6f8a9-f01a-4367-81cc-f12091b1ea2f.png)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGAME
+#### &nbsp;&nbsp;&nbsp;POSTGAME
 
 ![postgame](https://user-images.githubusercontent.com/9123670/138403233-c61f13d8-6aad-43ac-ae45-213b767d7f96.png)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BYE
+#### &nbsp;&nbsp;&nbsp;BYE
 
 ![bye](https://user-images.githubusercontent.com/9123670/138403291-bbded2aa-c8d4-42f7-b7bf-1578436c1076.png)
 
