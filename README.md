@@ -7,7 +7,7 @@ A Home Assistant frontend custom card for the [ha-nfl](https://github.com/zacs/h
 
 #### &nbsp;&nbsp;&nbsp;IN GAME
 
-![ingame](https://user-images.githubusercontent.com/9123670/138403208-92f6f8a9-f01a-4367-81cc-f12091b1ea2f.png)
+![ingame](https://user-images.githubusercontent.com/9123670/138606167-0d6416e4-e58b-454f-8cc3-e67dcbf42372.png)
 
 #### &nbsp;&nbsp;&nbsp;POSTGAME
 
