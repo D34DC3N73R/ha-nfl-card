@@ -26,6 +26,8 @@ class NFLCard extends LitElement {
     const outlineColor = this._config.outline_color;
     const teamProb = (stateObj.attributes.team_win_probability * 100).toFixed(0);
     const oppoProb = (stateObj.attributes.opponent_win_probability * 100).toFixed(0);
+    const tScr = stateObj.attributes.team_score;
+    const oScr = stateObj.attributes.opponent_score;
 
     var dateForm = new Date (stateObj.attributes.date);
     var gameDay = dateForm.toLocaleDateString('en-US', { weekday: 'long' });
@@ -51,13 +53,17 @@ class NFLCard extends LitElement {
     if (stateObj.attributes.possession == stateObj.attributes.opponent_id) {
       var oppoPoss = 1;
     }
-    if (stateObj.state == 'POST' && stateObj.attributes.team_score > stateObj.attributes.opponent_score ) {
+    if (stateObj.state == 'POST' && tScr > oScr) {
       var oppoScore = 0.6;
       var teamScore = 1;
     }
-    if (stateObj.state == 'POST' && stateObj.attributes.opponent_score > stateObj.attributes.team_score ) {
+    if (stateObj.state == 'POST' && tScr < oScr) {
       var oppoScore = 1;
       var teamScore = 0.6;
+    }
+    if (stateObj.state == 'POST' && tScr == oScr) {
+      var oppoScore = 1;
+      var teamScore = 1;
     }
     if (stateObj.attributes.team_homeaway == 'home') {
       var teamColor = stateObj.attributes.team_colors[0];
