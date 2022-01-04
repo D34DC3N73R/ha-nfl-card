@@ -55,15 +55,15 @@ class NFLCard extends LitElement {
     if (stateObj.attributes.possession == stateObj.attributes.opponent_id) {
       var oppoPoss = 1;
     }
-    if (Boolean(stateObj.state == 'POST') && (tScr*100) > (oScr*100)) {
+    if (Boolean(stateObj.state == 'POST') && Number(tScr) > Number(oScr)) {
         var oppoScore = 0.6;
         var teamScore = 1;
     }
-    if (Boolean(stateObj.state == 'POST') && (tScr*100) < (oScr*100)) {
+    if (Boolean(stateObj.state == 'POST') && Number(tScr) < Number(oScr)) {
         var oppoScore = 1;
         var teamScore = 0.6;
     }
-    if (Boolean(stateObj.state == 'POST') && (tScr*100) == (oScr*100)) {
+    if (Boolean(stateObj.state == 'POST') && Number(tScr) == Number(oScr)) {
         var oppoScore = 1;
         var teamScore = 1;
     }
