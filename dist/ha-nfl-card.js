@@ -98,7 +98,7 @@ class NFLCard extends LitElement {
           .card { position: relative; overflow: hidden; padding: 16px 16px 20px; font-weight: 400; }
           .team-bg { opacity: 0.08; position: absolute; top: -30%; left: -20%; width: 58%; z-index: 0; }
           .opponent-bg { opacity: 0.08; position: absolute; top: -30%; right: -20%; width: 58%; z-index: 0; }
-          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 1; }
           .team { text-align: center; width: 35%;}
           .team img { max-width: 90px; }
           .score { font-size: 3em; text-align: center; }
@@ -141,7 +141,7 @@ class NFLCard extends LitElement {
             .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 400; }
             .team-bg { opacity: 0.08; position:absolute; top: -20%; left: -20%; width: 58%; z-index: 0; }
             .opponent-bg { opacity: 0.08; position:absolute; top: -20%; right: -20%; width: 58%; z-index: 0; }
-            .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+            .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 1; }
             .team { text-align: center; width:35%; }
             .team img { max-width: 90px; }
             .possession, .teamposs, .oppoposs { font-size: 2.5em; text-align: center; opacity: 0; font-weight:900; }
@@ -240,7 +240,7 @@ class NFLCard extends LitElement {
             .card { position: relative; overflow: hidden; padding: 0 16px 20px; font-weight: 400; }
             .team-bg { opacity: 0.08; position:absolute; top: -20%; left: -20%; width: 58%; z-index: 0; }
             .opponent-bg { opacity: 0.08; position:absolute; top: -20%; right: -20%; width: 58%; z-index: 0; }
-            .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+            .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 1; }
             .team { text-align: center; width: 35%; }
             .team img { max-width: 90px; }
             .name { font-size: 1.4em; margin-bottom: 4px; }
@@ -299,7 +299,7 @@ class NFLCard extends LitElement {
         <style>
           .card { position: relative; overflow: hidden; padding: 16px 16px 20px; font-weight: 400; }
           .team-bg { opacity: 0.08; position: absolute; top: -20%; left: -30%; width: 75%; z-index: 0; }
-          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 1; }
           .team { text-align: center; width: 50%; }
           .team img { max-width: 90px; }
           .name { font-size: 1.6em; margin-bottom: 4px; }
@@ -326,7 +326,7 @@ class NFLCard extends LitElement {
         <style>
           .card { position: relative; overflow: hidden; padding: 16px 16px 20px; font-weight: 400; }
           .team-bg { opacity: 0.08; position: absolute; top: -50%; left: -30%; width: 75%; z-index: 0; }
-          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 99; }
+          .card-content { display: flex; justify-content: space-evenly; align-items: center; text-align: center; position: relative; z-index: 1; }
           .team { text-align: center; width: 50%; }
           .team img { max-width: 90px; }
           .name { font-size: 1.6em; margin-bottom: 4px; }
