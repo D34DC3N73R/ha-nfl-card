@@ -1,5 +1,7 @@
-import { html } from "https://unpkg.com/lit-html@2.0.0/lit-html.js?module";
-import { LitElement } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
+import {
+  LitElement,
+  html,
+} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 class NFLCard extends LitElement {
 
