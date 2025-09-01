@@ -38,6 +38,7 @@ class NFLCard extends LitElement {
     var gameTime = dateForm.toLocaleTimeString('en-US', { hour: '2-digit', minute:'2-digit' });
     var gameMonth = dateForm.toLocaleDateString('en-US', { month: 'short' });
     var gameDate = dateForm.toLocaleDateString('en-US', { day: '2-digit' });
+    var gameDateLong = dateForm.toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric'})
     var outColor = outlineColor;
     
     if (outline == true) {
@@ -261,6 +262,8 @@ class NFLCard extends LitElement {
             .kickoff { text-align: center; margin-top: -24px; }
             .odds {${disableOdds ? 'display: none;' : ''}}
             .overunder {${disableOdds ? 'display: none;' : '' }}
+            .date {${disableOdds ? '' : 'display: none;' }}
+            .time {${disableOdds ? '' : 'display: none;' }}
           </style>
           <ha-card>
               <div class="card">
@@ -284,12 +287,14 @@ class NFLCard extends LitElement {
               </div>
               <div class="line"></div>
               <div class="sub1">
-                <div class="date">Kickoff ${stateObj.attributes.kickoff_in}</div>
+                <div class="kickoff-in">Kickoff ${stateObj.attributes.kickoff_in}</div>
                 <div class="odds">${stateObj.attributes.odds}</div>
+                <div class="date">${gameDateLong}</div>
               </div>
               <div class="sub2">
                 <div class="venue">${stateObj.attributes.venue}</div>
                 <div class="overunder"> O/U: ${stateObj.attributes.overunder}</div>
+                <div class="time">${gameTime}</div>
               </div>
               <div class="sub3">
                 <div class="location">${stateObj.attributes.location}</div>
