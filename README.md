@@ -44,6 +44,7 @@ type: module
 | `entity` | Name of ha-nfl sensor | `sensor.nfl` | Yes  | Valid sensor |
 | `outline` | Outline team colors (helpful w/ dark themes) |`false` | No |  `true` `false` |
 | `outline_color` | Specifies outline color. | `white` | No |  CSS color or hex value  |
+| `disable_odds` | Disables displaying "odds", "over/under", and "Win Probability" |  `false` | No | `true` `false` |
 
 ## Examples
 ```
@@ -62,6 +63,14 @@ outline: true
 outline_color: '#ffe500'
 ```
 ![example2](https://user-images.githubusercontent.com/9123670/138405612-8efbb117-4f4b-4eb9-8ef0-339e9b35c868.png)
+
+```
+type: 'custom:nfl-card'
+entity: sensor.nfl
+outline: true
+outline_color: '#E31837'
+disable_odds: true
+```
 
 ## Minimal Required Configuration
 ```
