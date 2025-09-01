@@ -71,6 +71,7 @@ outline: true
 outline_color: '#E31837'
 disable_odds: true
 ```
+![example3](https://raw.githubusercontent.com/20bbrown14/ha-nfl-card/master/.github/example_odds_disabled.png)
 
 ## Minimal Required Configuration
 ```
