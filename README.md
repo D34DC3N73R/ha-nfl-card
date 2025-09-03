@@ -44,6 +44,7 @@ type: module
 | `entity` | Name of ha-nfl sensor | `sensor.nfl` | Yes  | Valid sensor |
 | `outline` | Outline team colors (helpful w/ dark themes) |`false` | No |  `true` `false` |
 | `outline_color` | Specifies outline color. | `white` | No |  CSS color or hex value  |
+| `locale` | Specifies the locale to use for date and time. | `en-US` | No | A valid [locale code.](https://simplelocalize.io/data/locales/) |
 | `disable_odds` | Disables displaying "odds", "over/under", and "Win Probability" |  `false` | No | `true` `false` |
 
 ## Examples

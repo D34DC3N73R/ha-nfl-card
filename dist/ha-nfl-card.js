@@ -27,6 +27,7 @@ class NFLCard extends LitElement {
     const stateObj = this.hass.states[this._config.entity];
     const outline = this._config.outline;
     const outlineColor = this._config.outline_color;
+    const locale = this._config.locale;
     const disableOdds = this._config.disable_odds;
     const teamProb = (stateObj.attributes.team_win_probability * 100).toFixed(0);
     const oppoProb = (stateObj.attributes.opponent_win_probability * 100).toFixed(0);
@@ -34,11 +35,10 @@ class NFLCard extends LitElement {
     var oScr = stateObj.attributes.opponent_score;
 
     var dateForm = new Date (stateObj.attributes.date);
-    var gameDay = dateForm.toLocaleDateString('en-US', { weekday: 'long' });
-    var gameTime = dateForm.toLocaleTimeString('en-US', { hour: '2-digit', minute:'2-digit' });
-    var gameMonth = dateForm.toLocaleDateString('en-US', { month: 'short' });
-    var gameDate = dateForm.toLocaleDateString('en-US', { day: '2-digit' });
-    var gameDateLong = dateForm.toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric'})
+    var gameDay = dateForm.toLocaleDateString(locale, { weekday: 'long' });
+    var gameTime = dateForm.toLocaleTimeString(locale, { hour: '2-digit', minute:'2-digit' });
+    var gameMonth = dateForm.toLocaleDateString(locale, { month: 'short' });
+    var gameDate = dateForm.toLocaleDateString(locale, { day: '2-digit' });
     var outColor = outlineColor;
     
     if (outline == true) {
