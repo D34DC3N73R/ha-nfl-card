@@ -324,6 +324,7 @@ class NFLCard extends LitElement {
               <div class="team">
                 <img src="${stateObj.attributes.team_logo}" />
                 <div class="name">${stateObj.attributes.team_name}</div>
+                <div class="record">${stateObj.attributes.team_record}</div>
               </div>
               <div class="bye">BYE</div>
             </div>
