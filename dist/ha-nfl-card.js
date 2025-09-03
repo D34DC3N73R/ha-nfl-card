@@ -27,6 +27,7 @@ class NFLCard extends LitElement {
     const stateObj = this.hass.states[this._config.entity];
     const outline = this._config.outline;
     const outlineColor = this._config.outline_color;
+    const disableOdds = this._config.disable_odds;
     const teamProb = (stateObj.attributes.team_win_probability * 100).toFixed(0);
     const oppoProb = (stateObj.attributes.opponent_win_probability * 100).toFixed(0);
     var tScr = stateObj.attributes.team_score;
@@ -37,6 +38,7 @@ class NFLCard extends LitElement {
     var gameTime = dateForm.toLocaleTimeString('en-US', { hour: '2-digit', minute:'2-digit' });
     var gameMonth = dateForm.toLocaleDateString('en-US', { month: 'short' });
     var gameDate = dateForm.toLocaleDateString('en-US', { day: '2-digit' });
+    var gameDateLong = dateForm.toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric'})
     var outColor = outlineColor;
     
     if (outline == true) {
@@ -168,11 +170,11 @@ class NFLCard extends LitElement {
             .clock { text-align: center; font-size: 1.4em; }
             .down-distance { text-align: right; }
             .play-clock { font-size: 1.4em; text-align: center; margin-top: -24px; }
-            .probability-text { text-align: center; }
+            .probability-text { text-align: center; ${disableOdds ? 'display: none;' : ''}}
             .prob-flex { width: 100%; display: flex; justify-content: center; margin-top: 4px; }
             .opponent-probability { width: ${oppoProb}%; background-color: ${oppoColor}; height: 12px; border-radius: 0 ${probRadius}px ${probRadius}px 0; border: ${clrOut}px solid ${outColor}; border-left: 0; transition: all 1s ease-out; }
             .team-probability { width: ${teamProb}%; background-color: ${teamColor}; height: 12px; border-radius: ${probRadius}px 0 0 ${probRadius}px; border: ${clrOut}px solid ${outColor}; border-right: 0; transition: all 1s ease-out; }
-            .probability-wrapper { display: flex; }
+            .probability-wrapper { ${disableOdds ? 'display: none;' : 'display: flex;'}; }
             .team-percent { flex: 0 0 10px; padding: 0 10px 0 0; }
             .oppo-percent { flex: 0 0 10px; padding: 0 0 0 10px; text-align: right; }
             .percent { padding: 0 6px; }
@@ -258,6 +260,10 @@ class NFLCard extends LitElement {
             .clock { text-align: center; font-size: 1.4em; }
             .down-distance { text-align: right; font-weight: 700; }
             .kickoff { text-align: center; margin-top: -24px; }
+            .odds {${disableOdds ? 'display: none;' : ''}}
+            .overunder {${disableOdds ? 'display: none;' : '' }}
+            .date {${disableOdds ? '' : 'display: none;' }}
+            .time {${disableOdds ? '' : 'display: none;' }}
           </style>
           <ha-card>
               <div class="card">
@@ -281,12 +287,14 @@ class NFLCard extends LitElement {
               </div>
               <div class="line"></div>
               <div class="sub1">
-                <div class="date">Kickoff ${stateObj.attributes.kickoff_in}</div>
+                <div class="kickoff-in">Kickoff ${stateObj.attributes.kickoff_in}</div>
                 <div class="odds">${stateObj.attributes.odds}</div>
+                <div class="date">${gameDateLong}</div>
               </div>
               <div class="sub2">
                 <div class="venue">${stateObj.attributes.venue}</div>
                 <div class="overunder"> O/U: ${stateObj.attributes.overunder}</div>
+                <div class="time">${gameTime}</div>
               </div>
               <div class="sub3">
                 <div class="location">${stateObj.attributes.location}</div>
