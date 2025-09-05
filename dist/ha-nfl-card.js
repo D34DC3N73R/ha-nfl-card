@@ -39,6 +39,7 @@ class NFLCard extends LitElement {
     var gameTime = dateForm.toLocaleTimeString(locale, { hour: '2-digit', minute:'2-digit' });
     var gameMonth = dateForm.toLocaleDateString(locale, { month: 'short' });
     var gameDate = dateForm.toLocaleDateString(locale, { day: '2-digit' });
+    var gameDateLong = dateForm.toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric'});
     var outColor = outlineColor;
     
     if (outline == true) {
